@@ -8,6 +8,8 @@ import Row from './Row'
 const mapIndexed = addIndex(map)
 
 const addHeaderRow = (spreadsheet) => {
+  console.log(spreadsheet)
+
   const numColumns = spreadsheet[0].length
 
   return (

@@ -1,6 +1,11 @@
 import { times } from 'ramda'
 
-import { COLS, ROWS } from './constants'
+import { 
+  COLS, 
+  ROWS, 
+  UPDATE_CELL 
+} from './constants'
+import { updateCellValue } from './domain'
 
 const defaultState = {
   spreadsheet: times(
@@ -12,11 +17,24 @@ const defaultState = {
   )
 }
 
-export const reducer = (state = defaultState, action) => {
-  const { payload, type } = action
+export const reducer = (state = defaultState, actions) => {
+  const { 
+    payload, 
+    type 
+  } = actions
 
   switch(type) {
-    default: 
+    case UPDATE_CELL:
+      return {
+        ...state,
+        spreadsheet: updateCellValue(
+          state.spreadsheet,
+          payload.row,
+          payload.cell,
+          payload.value
+        )
+      }
+    default:
       return state
   }
 }
